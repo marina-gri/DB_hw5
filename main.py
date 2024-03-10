@@ -5,10 +5,10 @@ import psycopg2
 # 1. Функция, создающая структуру БД (таблицы).
 def create_db(conn):
     with conn.cursor() as cur:
-        cur.execute("""
-                DROP TABLE client_info CASCADE;
-                DROP TABLE phones CASCADE;
-                """)
+        # cur.execute("""
+        #         DROP TABLE client_info CASCADE;
+        #         DROP TABLE phones CASCADE;
+        #         """)
 
         cur.execute("""
             CREATE TABLE IF NOT EXISTS client_info(
@@ -53,9 +53,9 @@ def add_client(conn, first_name, last_name, email, phones=None):
                             )
         else:
             cur.execute("""
-                                        INSERT INTO phones(client_id, phone_number)
-                                        VALUES(%s, %s);
-                                        """, (cl_id, phones)
+                        INSERT INTO phones(client_id, phone_number)
+                        VALUES(%s, %s);
+                        """, (cl_id, phones)
                         )
         conn.commit()
 
